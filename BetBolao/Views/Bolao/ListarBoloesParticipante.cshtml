@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BetBolao.Models.Bolao>
+
+@{
+    ViewBag.Title = "ListarBoloesParticipante";
+}
+
+<h2>Bolões que você participa...</h2>
+@Html.ActionLink("Cadastrar Novo", "CadastrarBolao", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Voltar Home", "HomeUsuario", "Home", null, new { @class = "btn btn-info" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeBolao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioCriadorBolao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCampeonatoAssociado)
+        </th>
+        <th>
+            @Html.Label("Opções")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeBolao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioCriadorBolao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCampeonatoAssociado)
+        </td>
+        <td>
+            @if (item.UsuarioCriadorBolao == (int)Session["id"])
+            {
+                @Html.ActionLink("Convidar Amigos", "ConvidarParticipantes", new { idbolao = item.Id, idanfitriao = item.UsuarioCriadorBolao })
+            }
+
+            @Html.ActionLink("Visualizar Bolão","ListarBolao", "Bolao", new { id = item.Id}, null)
+            @Html.ActionLink("Realizar Apostas","Apostar", "Apostas", new { idCompeticao = item.IdCampeonatoAssociado, idbolao = item.Id},null) |
+            @Html.ActionLink("Sair Bolão", "SairBolao", new { idbolao = item.Id})
+
+
+
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+        </td>
+
+    </tr>
+}
+
+</table>

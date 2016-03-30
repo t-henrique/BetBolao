@@ -1,0 +1,38 @@
+﻿@using System.Web.Mvc.Html
+@using System.Web.UI.WebControls
+@using System.Web.Security
+
+@{
+    ViewBag.Title = "LogOn";
+
+}
+@*<h2>LogOn</h2>
+@ViewBag.mensagem
+@ViewBag.nome*@
+
+<div class="text text-danger">
+    @Html.ValidationSummary()
+</div>
+
+<div class="imagem-login">
+    <img class="img-login" src="~/Imagens/Escudo.png"/>
+</div>
+
+
+
+
+<div class="div-login">
+
+    @using (Html.BeginForm("LogOn", "Conta"))
+    {
+        @*@Html.Label("email: ")*@
+        @Html.TextBox("email", null, new { @autofocus = true, @class = "email-senha", @placeholder = "Email" })
+        
+        @*@Html.Label("senha: ")*@
+
+        @Html.Password("senha", null, new { @class = "email-senha", @placeholder = "Senha" })
+        <br />
+        <input type="submit" value="Logar" />
+
+    }
+</div>

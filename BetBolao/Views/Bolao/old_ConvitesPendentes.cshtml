@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BetBolao.Models.ConvitesBolao>
+
+@{
+    ViewBag.Title = "ConvitesPendentes";
+}
+
+<h2>ConvitesPendentes</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdConvite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdBolao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAnfitriao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdConvidado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailConvidado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TextoConvite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aberto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aceite)
+            </th>
+            <th>
+                Opção
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdConvite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdBolao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAnfitriao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdConvidado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailConvidado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextoConvite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aberto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aceite)
+                </td>
+                <td>
+                    @if (item.Aberto == "sim")
+                    {
+                        @Html.ActionLink("Aceitar", "AceitarConvite", new {id = item.IdConvite})
+                        <b>|</b>
+                        @Html.ActionLink("Rejeitar", "RejeitarConvite", new {id = item.IdConvite})
+                    }
+                    else
+                    {
+                        <div>N/A</div>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <div> Você não possui convites pendentes</div>
+}

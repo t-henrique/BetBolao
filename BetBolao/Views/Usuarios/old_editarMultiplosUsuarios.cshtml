@@ -1,0 +1,68 @@
+﻿@using BetBolao.Compartilhado.Models
+@using BetBolao.Models
+@model IEnumerable<BetBolao.Compartilhado.Models.Usuarios>
+
+@{
+    ViewBag.Title = "editarMultiplosUsuarios";
+}
+@{
+    List<Usuarios> usuarioses= new List<Usuarios>();
+}
+<h2>editarMultiplosUsuarios</h2>
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Senha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentarios)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeFavorito)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            {
+                var usu = new Usuarios();
+
+                <tr>
+                    <td>
+                        @Html.EditorFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => item.Senha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataNascimento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comentarios)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeFavorito)
+                    </td>
+                </tr>
+            usuarioses.Add(usu);
+            }
+        }
+
+    </table>
+    <input type="submit" value="editarMultiplosUsuarios" class="btn btn-default" />
+}

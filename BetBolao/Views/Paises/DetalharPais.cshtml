@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BetBolao.Models.Time>
+
+@{
+    ViewBag.Title = "Detalhar Pais";
+    //var nomePais = new BetBolao.Models.Pais();
+    ////nomePais.retornarPaisDetalhado()
+
+}
+
+<h2> <p class="bg-sucess">Detalhar Times cadastrados na @ViewBag.nomePais.</h2>
+
+@*<table class="table table-striped table-responsive">*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPais)
+            </th>
+            <th>Ações:</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPais)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarTime", "Times", new { id = item.IdTime }, htmlAttributes: new { @class = "btn btn-primary" })
+                    @*@Html.ActionLink("Editar", "EditarTime", new { id = item.idTime }) |*@
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+
+        }
+    </table>

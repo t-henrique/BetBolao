@@ -1,0 +1,134 @@
+﻿@using System.ServiceModel.Channels
+@using System.Web.UI.WebControls
+@model BetBolao.Models.JogosCompeticao
+
+@{
+    ViewBag.Title = "TabelaJogosCompeticao";
+    //string id = Request.Params["Id"];
+}
+
+
+
+@Html.ActionLink("Lancar Placar", "LancarPlacarJogos", "Competicao", new { id = ViewBag.id }, new { @class = "btn btn-success" })
+
+<h2>Tabela Jogos Competicao</h2>
+
+@using (Html.BeginForm("ExcluirJogosCompeticao", "Competicao"))
+{
+    if (Model.TabelaJogos.Count > 0)
+    {
+        @*<table class="table table-bordered table-striped table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdJogo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCompeticao)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdTimeMandante)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResultadoMandante)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResultadoVisitante)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdTimeVisitante)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataJogo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HorarioJogo)
+                    </th>
+                </tr>
+            </table>*@
+        @*<input type="checkbox" hidden="hidden" name="checkboxList[0]" value="0" checked="checked" />*@
+
+        foreach (var item in Model.TabelaJogos)
+        {
+
+            <ul class="list-inline">
+
+                <li>
+                    <span class="circuferenciaNumerica-placarJogo">
+                        <div class="circuferenciaNumerica">
+                            @Html.DisplayFor(modelItem => item.IdJogo)
+                        </div>
+                    </span>
+                    <div class="placar-jogo">
+
+                        <div class="placar-jogo-informacoes">
+                            <span>
+                                @item.DataJogo.ToString("f")
+                            </span>
+                        </div>
+                        <div class="placar-jogo-equipes">
+                            <span>
+
+                                @Html.DisplayFor(modelItem => item.IdCompeticao)
+                                <input type="hidden" value="@item.IdCompeticao" name="idCompeticao" id="idCompeticao" />
+                            </span>
+                            <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
+                                @Html.DisplayFor(modelItem => item.NomeTimeMandante)
+                                @*@Html.DisplayFor(modelitem => item.IdTimeMandante)*@
+                            </span>
+                            <span class="placar-jogo-equipes-item placar-jogo-equipes-placar">
+                                <span class="placar-jogo-equipes-placar-mandante resultadoJogo">
+                                    @Html.DisplayFor(modelItem => item.ResultadoMandante)
+                                </span>
+                                <span>X</span>
+                                <span class="placar-jogo-equipes-placar-visitante resultadoJogo">
+                                    @Html.DisplayFor(modelItem => item.ResultadoVisitante)
+
+
+                                </span>
+                            </span>
+                            <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+                                @*@Html.DisplayFor(modelItem => item.IdTimeVisitante)*@
+                                @Html.DisplayFor(modelItem => item.NomeTimeVisitante)
+                            </span>
+                        </div>
+                        <div class="placar-jogo-informacoes-campeonato">
+                            <span>@Html.DisplayFor(modelItem => item.Competicao)</span>
+                            @*<span>
+                                    @item.DataJogo.ToString("f")
+                                </span>*@
+                        </div>
+                        @{
+                            if (!item.JogoFinalizado)
+                            {
+                                <div class="checkboxTextoDelecao">
+                                    <div><span> @Html.ActionLink("Editar Jogo", "EditarJogo", new {id = item.IdJogo, idCompeticao = item.IdCompeticao}, new {@class = "btn btn-warning"})</span></div>
+                                    <span>
+                                        <div class="btn btn-danger checkbox" readonly="true"> Deletar jogo <b>@item.IdJogo</b>?</div>
+                        <input @*class="chkclass"*@ id="chklist" name="chkbox" onclick=" habilitarBotao(chklist) " type="checkbox" value="@item.IdJogo" class="btn btn-danger" />
+                        @*@Model.TabelaJogos.IndexOf(item)*@
+                    </span>
+
+                                </div>
+                            }
+                        }
+
+                    </div>
+
+                </li>
+            </ul>
+        }
+        <input type="submit" value="Deletar Jogos" id="btnDeletar" disabled="disabled" onclick=" preencheCheckList(chklist)" class="btn btn-danger" />
+    }
+
+    else
+    {
+
+        <h1 class="text text-danger">Aviso: Este campeonato não possui jogos cadastrados!</h1>
+        @*@Url.Action("Cadastrar Jogos", "CadastrarJogosCompeticao", new {id = RouteData["id"]})*@
+        @*@Html.ActionLink("Cadastrar Jogos", "CadastrarJogosCompeticao", new {@value = id})*@
+        @Html.ActionLink("Listar competições", "ListarCompeticoes")
+    }
+}

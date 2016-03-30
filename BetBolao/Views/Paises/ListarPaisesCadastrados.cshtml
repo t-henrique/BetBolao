@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BetBolao.Models.Pais>
+
+@{
+    ViewBag.Title = "Listar Paises Cadastrados";
+}
+
+<h2>Lista dos Países Cadastrados</h2>
+
+@Html.ActionLink("Cadastrar Novo", "CadastrarPais", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Voltar Home", "HomeUsuario", "Home", null, new { @class = "btn btn-info" })
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomePais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abreviacao)
+            </th>
+            <th>Ações</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomePais)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPais)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Abreviacao)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhar", "DetalharPais", new { id = item.IdPais }, htmlAttributes: new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Editar", "EditarPais", new { id = item.IdPais }, htmlAttributes: new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Deletar", "DeletarPais", new { /* id=item.PrimaryKey */ }, htmlAttributes: new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>

@@ -1,0 +1,48 @@
+﻿@model BetBolao.Models.Time
+
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<h2>Cadastro de times</h2>
+
+
+@using (Html.BeginForm())
+{
+
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdPais, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.IdPais, ViewBag.idPais as SelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdPais, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default"/>
+                @Html.ActionLink("Cancelar", "HomeUsuario", "Home", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    </div>
+}
+<div class="logo-area-usuario">
+    <img src="~/Imagens/área times.png" />
+</div>
+@*<div>@Html.ActionLink("Voltar", "Index")</div>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

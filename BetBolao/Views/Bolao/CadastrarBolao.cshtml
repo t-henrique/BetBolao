@@ -1,0 +1,54 @@
+﻿@model BetBolao.Models.Bolao
+
+@{
+    ViewBag.Title = "CriarBolao";
+}
+
+<h2>Crie seu bolão...</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeBolao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeBolao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeBolao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+
+            @Html.HiddenFor(model => model.UsuarioCriadorBolao, new { @Value = ViewBag.idUsuario })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdCampeonatoAssociado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdCampeonatoAssociado, ViewBag.competicoes as SelectList, "selecione um campeonato", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdCampeonatoAssociado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Criar Bolão" class="btn btn-default" />
+                @Html.ActionLink("Cancelar", "HomeUsuario", "Home", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    </div>
+}
+<div class="logo-area-usuario">
+    <img src="~/Imagens/Área do bolão.png" />
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BetBolao.Models.Competicao>
+
+@{
+    ViewBag.Title = "Listar Competições";
+}
+
+<h2>Listar Competições</h2>
+
+@Html.ActionLink("Cadastrar Novo", "CadastrarCompeticao", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Voltar Home", "HomeUsuario", "Home", null, new { @class = "btn btn-info" })
+
+
+    @*<table class="table table-responsive table-striped" id="centerTable">*@
+<table class="table " id="centerTable">
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCompeticao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th>
+                Ações:
+            </th>
+        </tr>
+        @{
+            var i = 0;
+        }
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
+                    <p class="circuferenciaNumerica">@i</p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompeticao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhar", "DetalharCompeticao", new { id = item.Id, status = item.Ativo }, htmlAttributes: new { @class = "btn btn-info" })
+                    @if (item.Ativo == "Sim")
+                    {
+                        @Html.ActionLink("Editar", "EditarCompeticao", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+
+                        if (item.Ano < DateTime.Now.Year)
+                        {
+                            @Html.ActionLink("Copiar", "DuplicarCompeticao", new { id = item.Id, ano = item.Ano, nomeCompeticao = item.NomeCompeticao }, htmlAttributes: new { @class = "btn btn-primary" })
+                        }
+                        @Html.ActionLink("Desativar", "DesativarCompeticao", new { ano = item.Ano, id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Associar", "AssociarTimeCompeticao", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                    }
+                </td>
+            </tr>
+        }
+    </table>

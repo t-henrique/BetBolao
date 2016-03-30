@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "HomeUsuario";
+}
+
+<h2>
+    Dashboard - Usuário
+</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-info">
+                <h4 class="active panel-heading">Área de Usuário</h4>
+                <div class="btn">
+                    @Html.ActionLink("Editar Cadastro", "Editar", "Usuarios", null, new { @class = "btn btn-success " })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-info">
+                <h4 class="panel panel-heading">Área de Bolão</h4>
+                <div class="btn">
+                    @Html.ActionLink("Cadastrar Bolão", "CadastrarBolao", "Bolao", null, new { @class = "btn btn-success" })
+                </div>
+                <div class="btn">
+                    @Html.ActionLink("Convites Pendentes", "ConvitesPendentes", "Bolao", null, new { @class = "btn btn-success" })
+                </div>
+                <div class="btn">
+                    @Html.ActionLink("Listar Bolões Participante", "ListarBoloesParticipante", "Bolao", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-info">
+                <h4 class="panel panel-heading">Área de Competições</h4>
+                @*<div class="btn">
+                        @Html.ActionLink("Cadastrar Competição", "CadastrarCompeticao", "Competicao", null, new { @class = "btn btn-success" })
+
+                    </div>*@
+                <div class="btn">
+                    @Html.ActionLink("Listar Competicões Cadastradas", "ListarCompeticoes", "Competicao", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-danger">
+                <h4 class="panel panel-heading">Lembretes</h4>
+                <div>
+                    <span>Nesta área, a ideia seria mostrar ao apostador a quantidade de jogos que acontecerão nos próximos 7 dias baseando-se nas competições em que ele está participando pelos bolões.</span>
+                    @*@Html.ActionLink("Modelo Exemplo", "", "", null, new { @class = "btn btn-danger" })*@
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-danger">
+                <h4 class="panel panel-heading">Jogos</h4>
+                <span>
+                    Nesta área, a ideia seria mostrar opções em relação aos jogos finalizados na última semana de acordo com os bolões que ele participa.
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <span class="panel panel-danger">
+                <h4 class="panel panel-heading">Ranking</h4>
+                <span>
+                    nesta área, a ideia seria mostrar um dashboard do usuário apontando quantos palpites ele acertou, quantos pontos ele obteve no mês, a média de pontos dele por jogo, variação do desempenho dele em relação aos seus amigos de bolão.
+                </span>
+            </span>
+        </div>
+    </div>
+</div>

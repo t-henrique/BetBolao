@@ -1,0 +1,75 @@
+﻿@using System.ComponentModel
+@using System.Data
+@using System.Diagnostics
+@model System.Data.DataTable
+@{
+    ViewBag.Title = "Detalhar Competição";
+}
+@{
+    int i = 0;
+    int idRegistro = 0;
+    int idCompeticao = ViewBag.id;
+    string status = ViewBag.status;
+}
+<h2>Detalhes da Competição</h2>
+
+@{
+    if (ViewBag.status == "Sim")
+    {
+        if (Model.Rows.Count > 0)
+        {
+            @Html.ActionLink("Cadastrar jogos", "CadastrarJogosCompeticao", new { id = idCompeticao }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Editar", "CadastrarJogosCompeticao", new { id = idCompeticao }, new { @class = "btn btn-warning" })
+        }
+    }
+    else
+    {
+        @Html.ActionLink("Cadastrar jogos", "", "", new { @class = "btn btn-success", @disabled = "true" })
+        @Html.ActionLink("Editar", "", "", new { @class = "btn btn-warning", @disabled = "true" })
+    }
+
+}
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <th>@col.Caption</th>
+                }
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Rows)
+            {
+                i++;
+                <tr>
+
+                    <td>
+                        <p class="circuferenciaNumerica">@i</p>
+                    </td>
+                    @foreach (var cell in row.ItemArray)
+                    {
+                        // código que deverá ser entregue em produção.
+                        //if ((@cell.GetType() == typeof(int)) && (@cell.ToString() != DateTime.Now.Year.ToString()))
+                        //código exclusivo para os testes
+                        if ((@cell.GetType() == typeof(int)) && (@cell.ToString() != DateTime.Now.Year.ToString()) && (@cell.ToString() != (DateTime.Now.Year - 1).ToString()))
+                        {
+                            idRegistro = int.Parse(@cell.ToString());
+                            <input type="hidden" value="@cell.ToString()" name="idTime" />;
+                        }
+                        <td>@cell.ToString()</td>
+                    }
+                    <td>
+                        @(ViewBag.status == "Sim" ? Html.ActionLink("Excluir Clube", "ExcluirClubeCompeticao", new { idRegistro = idRegistro, idCompeticao }, new { @class = "btn btn-danger" }) : Html.ActionLink("Excluir Clube", "ExcluirClubeCompeticao", "", new { @class = "btn btn-danger", @disabled = "true" }))
+
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BetBolao.Models.Time>
+
+@{
+    ViewBag.Title = "Listar Todos Os Time";
+}
+
+<h2>Lista de todos os times</h2>
+@Html.ActionLink("Cadastrar Novo", "CadastrarTime", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Voltar Home", "HomeUsuario", "Home", null, new { @class = "btn btn-info" })
+
+
+@*<table class="table table-responsive table-striped">*@
+<table class="table ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPais)
+            </th>
+            <th>
+                Ações:
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPais)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarTime", new { id = item.IdTime }, htmlAttributes: new { @class = "btn btn-primary" })
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+
+    </table>

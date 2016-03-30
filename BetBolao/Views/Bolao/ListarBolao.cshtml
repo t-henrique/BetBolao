@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BetBolao.ViewModel.DTOParticipantesBolao>
+
+@{
+    ViewBag.Title = "ListarBolao";
+}
+
+<h2>ListarBolao</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdBolao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeBolao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUsuarioCriador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeCriador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdParticipante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeParticipante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pontuacao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdBolao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeBolao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdUsuarioCriador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeCriador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdParticipante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeParticipante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pontuacao)
+        </td>
+        <td>
+        </td>
+    </tr>
+}
+
+</table>

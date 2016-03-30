@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BetBolao.ViewModel.DtoConvitesPendentes>
+
+@{
+    ViewBag.Title = "ConvitesPendentes";
+}
+
+<h2>Convites Pendentes</h2>
+
+@*@Html.ActionLink("Cadastrar Novo", "ConvidarParticipantes", null, new { @class = "btn btn-success" })*@
+@Html.ActionLink("Voltar Home", "HomeUsuario", "Home", null, new { @class = "btn btn-info" })
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.IdBolao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeBolao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAnfitriao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAnfitriao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeConvidado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailConvidado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TextoConvite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aberto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aceite)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.IdBolao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeBolao)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeAnfitriao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAnfitriao)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeConvidado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailConvidado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TextoConvite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aberto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aceite)
+        </td>
+        <td>
+            @if (item.Aberto == "sim")
+            {
+                @Html.ActionLink("Aceitar", "AceitarConvite", new { id = item.IdConvite })
+                <b>|</b>
+                @Html.ActionLink("Rejeitar", "RejeitarConvite", new { id = item.IdConvite })
+            }
+            
+        </td>
+    </tr>
+}
+
+</table>
+

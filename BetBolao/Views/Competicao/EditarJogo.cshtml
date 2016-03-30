@@ -1,0 +1,114 @@
+﻿@model BetBolao.Models.JogosCompeticao
+
+@{
+    ViewBag.Title = "EditarJogo";
+}
+
+<h2>EditarJogo</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>JogosCompeticao</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdJogo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @Html.EditorFor(model => model.IdJogo, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                <input type="hidden" value=@Model.IdJogo class="form-control" readonly="readonly" name="idJogo" />
+                @Html.ValidationMessageFor(model => model.IdJogo, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdCompeticao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdCompeticao, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                <input type="hidden" name="idCompeticao" />
+                @Html.ValidationMessageFor(model => model.IdCompeticao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdTimeMandante, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdTimeMandante, ViewBag.Times as SelectList, new { @class = "form-control", @autofocus = "autofocus", @readonly="readonly" })
+                @*@Html.EditorFor(model => model.IdTimeMandante, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.IdTimeMandante, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResultadoMandante, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ResultadoMandante, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ResultadoMandante, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdTimeVisitante, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdTimeVisitante, ViewBag.Times as SelectList, String.Empty, new { @class = "form-control", autofocus = "autofocus", @readonly = "readonly"})
+                @*@Html.EditorFor(model => model.IdTimeVisitante, new {htmlAttributes = new {@class = "form-control"}})*@
+                @Html.ValidationMessageFor(model => model.IdTimeVisitante, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResultadoVisitante, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ResultadoVisitante, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ResultadoVisitante, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Data Atual:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" readonly="readonly" class="form-control" value=@Model.DataJogo.ToString("d") />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Nova Data:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.DataJogo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataJogo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Horário Atual:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="time" class="form-control" readonly="readonly" value="@Model.DataJogo.ToString("t")" />
+                @*@Html.Editor(@Model.HorarioJogo.ToString("t"), new {htmlAttributes = new {@class = "form-control", readyonly = "readonly"}})*@
+                @*@Html.ValidationMessageFor(model => model.HorarioJogo, "", new {@class = "text-danger"})*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Novo Horário:", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HorarioJogo, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.HorarioJogo, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Alterar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

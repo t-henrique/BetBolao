@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BetBolao.Models.Competicao>
+
+@{
+    ViewBag.Title = "Listar Competições";
+}
+
+<h2>Lista das competições disponíveis</h2>
+
+
+@*<table class="table table-responsive table-striped" id="centerTable">*@
+<table class="table " id="centerTable">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeCompeticao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+    </tr>
+    @{
+        var i = 0;
+    }
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>
+                <p class="circuferenciaNumerica">@i</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCompeticao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+        </tr>
+    }
+</table>
+
+

@@ -1,0 +1,112 @@
+﻿@model BetBolao.Models.JogosCompeticao
+
+@{
+    ViewBag.Title = "Apostar Jogos";
+    string idbolao = Request.Params["idbolao"];
+     
+}
+
+<h2>Tabela Jogos Competicao</h2>
+
+@using (Html.BeginForm("Apostar", "Apostas"))
+{
+    if (Model.TabelaJogos.Count > 0)
+    {
+        foreach (var item in Model.TabelaJogos)
+        {
+            {
+                {
+                    //var campoEnabled = "";
+                    <ul class="list-inline">
+                        <li>
+                            <span class="circuferenciaNumerica-placarJogo">
+                                <div>
+                                    @Html.DisplayFor(modelItem => item.IdJogo)
+                                    <input type="hidden" value="@item.IdJogo" name="idJogo" id="idJogo" />
+                                </div>
+                            </span>
+                            <div class="placar-jogo">
+
+                                <div class="placar-jogo-informacoes">
+                                    <span>
+                                        @item.DataJogo.ToString("f")
+                                        @*@{
+                                            //campoEnabled = "";
+                                            if (DateTime.Now >= item.DataJogo.AddHours(+2))
+                                            {
+                                                //campoEnabled = "";
+                                            }
+                                            else
+                                            {
+                                                //campoEnabled = "disabled = disabled";
+                                            }
+                                        }*@
+                                    </span>
+                                </div>
+                                <div class="placar-jogo-equipes">
+                                    <span>
+                                        @Html.DisplayFor(modelItem => item.IdCompeticao)
+
+                                    </span>
+                                    <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
+                                        @Html.DisplayFor(modelItem => item.NomeTimeMandante)
+                                        @*@Html.DisplayFor(modelitem => item.IdTimeMandante)*@
+                                    </span>
+                                    <span class="placar-jogo-equipes-item placar-jogo-equipes-placar">
+                                        <span @*class="placar-jogo-equipes-placar-mandante resultadoJogo"*@>
+                                            @*@Html.DisplayFor(m=>m.ResultadoMandante)*@
+
+                                            <input class="placar-jogo-equipes-placar-mandante resultadoJogo lacamentoPlacar " type="text" min="0" max="99" maxlength="2" pattern="^[0-9]" name="resultadoMandante" placeholder='@item.ResultadoMandante' id="txtLancarPlacar" />
+
+                                        </span>
+
+                                        <span>X</span>
+
+                                        <span @*class="placar-jogo-equipes-placar-visitante resultadoJogo"*@>
+                                            @*@Html.DisplayFor(m => m.ResultadoVisitante)*@
+
+                                            <input type="text" class="placar-jogo-equipes-placar-visitante resultadoJogo lacamentoPlacar " min="0" max="99" maxlength="2" pattern="^[0-9]" name="resultadoVisitante" placeholder='@item.ResultadoVisitante' id="txtLancarPlacar"/>
+
+                                        </span>
+                                    </span>
+
+                                    <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+                                        @*@Html.DisplayFor(modelItem => item.IdTimeVisitante)*@
+                                        @Html.DisplayFor(modelItem => item.NomeTimeVisitante)
+                                    </span>
+                                </div>
+                                <div class="placar-jogo-informacoes-campeonato">
+                                    <span>@Html.DisplayFor(modelItem => item.Competicao)</span>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+                    </ul>
+                }
+            }
+        }
+
+        <input type="submit" value="Apostar Jogos" id="@idbolao" />
+
+    }
+
+
+    else
+    {
+
+        <h1 class="text text-danger">Aviso: Este campeonato não possui jogos cadastrados!</h1>
+        @*@Url.Action("Cadastrar Jogos", "CadastrarJogosCompeticao", new {id = RouteData["id"]})*@
+        @*@Html.ActionLink("Cadastrar Jogos", "CadastrarJogosCompeticao", new {@value = id})*@
+
+    }
+}
+
+@* código vem de lançar placar jogos*@
+
+
+
+
+
+

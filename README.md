@@ -1,5 +1,4 @@
-# BetBolao
+﻿# BetBolao
 
 
-esse é o meu bolão pro tcc
-TCC FInal de curso
+Projeto web/mobile bolão

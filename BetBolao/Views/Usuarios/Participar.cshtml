@@ -1,0 +1,97 @@
+﻿@using System.Activities.Expressions
+@using System.Collections
+@using System.Web.UI.WebControls
+@model BetBolao.Compartilhado.Models.Usuarios
+
+@{
+    ViewBag.Title = "Participar";
+}
+
+<h2>Cadastrar-se...</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal ">
+
+        <hr />
+        @Html.ValidationSummary(true, "Existem erros no Cadastro de Participante do BetBolão", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger " })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeFavorito, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @*@Html.DropDownListFor(m => m.TimeFavorito, ViewBag.nomeTime as SelectList, string.Empty, new { @class = "form-control" })*@
+
+                @Html.DropDownListFor(m => m.TimeFavorito, ViewBag.nomeTime as SelectList, string.Empty, new { @class = "form-control" })
+
+
+                @Html.ValidationMessageFor(model => model.TimeFavorito, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" name="Perfil" id="Perfil" value="apostador" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Participar" class="btn btn-default"/>
+                @Html.ActionLink("Cancelar", "HomeUsuario", "Home", null, new { @class = "btn btn-warning" })
+
+
+            </div>
+        </div>
+    </div>
+}
+
+<div class="logo-area-usuario">
+    <img src="~/Imagens/Área do usuário.png" />
+</div>
+
+
+@*estas 3 linhas abaixo habilitaram o jquery validation!!!*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

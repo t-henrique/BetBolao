@@ -1,0 +1,50 @@
+﻿@using System.Data
+@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Alterartimescompeticao";
+}
+
+<h2>Alterartimescompeticao</h2>
+
+<p>
+    @{
+        int i = 0;
+        int idRegistro = 0;
+        int idCompeticao = ViewBag.id;
+    }
+</p>
+@Html.BeginForm()
+    <table class="table">
+        <tr>
+            @foreach (DataColumn col in Model.Columns)
+            {
+                <th>@col.Caption</th>
+            }
+            <th></th>
+        </tr>
+        @foreach (DataRow row in Model.Rows)
+        {
+            i++;
+            <tr>
+                <td><i>@i</i></td>
+                @foreach (var cell in row.ItemArray)
+                {
+                    // código que deverá ser entregue em produção.
+                    if ((@cell.GetType() == typeof(int)) && (@cell.ToString() != DateTime.Now.Year.ToString()))
+                    {
+                        idRegistro = int.Parse(@cell.ToString());
+                        <input type="hidden" value="@cell.ToString()" name="idTime" />;
+                    }
+                    <td>@Html.Editor("@cell.ToString()")</td>
+                }
+                <td>@Html.ActionLink("Excluir Clube", "ExcluirClubeCompeticao", new {idRegistro, idCompeticao }, htmlAttributes: new { @class = "btn btn-danger" })</td>
+            </tr>
+        }
+
+    </table>
+@{
+    Html.EndForm();
+}
+
+@Html.ActionLink("salvar", "Alterartimescompeticao", new { /* id=item.PrimaryKey */ }) |

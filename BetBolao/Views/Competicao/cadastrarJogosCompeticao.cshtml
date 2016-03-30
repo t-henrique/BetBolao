@@ -1,0 +1,166 @@
+﻿@model BetBolao.Models.JogosCompeticao
+
+@{
+    ViewBag.Title = "Cadastro de Jogos da Competicao";
+}
+
+<div>
+    <div class="alinhamentoLeft">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h2>Cadastrar Jogos Competicao</h2>
+                @{
+            if (Model.TabelaJogos.Count > 0)
+            {
+                @Html.ActionLink("Tabela Completa", "TabelaJogosCompeticao", new { @id = ViewBag.idCompeticao }, new { @class = "btn btn-success" })
+            }
+                }
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdCompeticao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div>
+                            @*@Html.HiddenFor(model => model.IdCompeticao)*@
+                            <input type="text" readonly="readonly" class="form-control" value="@ViewBag.idCompeticao" name="idCompeticao" />
+                            @Html.ValidationMessageFor(model => model.IdCompeticao, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdTimeMandante, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.IdTimeMandante, ViewBag.Times as SelectList, String.Empty, new { @class = "form-control", autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(model => model.IdTimeMandante, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.ResultadoMandante, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ResultadoMandante, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ResultadoMandante, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdTimeVisitante, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.IdTimeVisitante, ViewBag.Times as SelectList, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdTimeVisitante, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataJogo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.DataJogo, new { htmlAttributes = new { @class = "form-control", min = @DateTime.UtcNow.Year.ToString(), max = @DateTime.UtcNow.AddYears(1).ToString("d", System.Globalization.CultureInfo.InvariantCulture) } })*@
+                        @Html.EditorFor(model => model.DataJogo, new { htmlAttributes = new { @class = "form-control", min = DateTime.Now.Year, max = DateTime.Today.Year + 2, } })
+                        @Html.ValidationMessageFor(model => model.DataJogo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HorarioJogo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        @Html.EditorFor(model => model.HorarioJogo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DataJogo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="CadastrarJogosCompeticao" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+        }
+        <div>
+
+
+
+
+        </div>
+    </div>
+    <div class="alinhamentoRight">
+        <h2>Tabela Jogos</h2>
+        <hr />
+        @{
+            if (Model.TabelaJogos.Count > 0)
+            {
+                foreach (var item in Model.TabelaJogos)
+                {
+                    <ul class="list-inline">
+
+                        <li>
+                            <span class="circuferenciaNumerica-placarJogo">
+                                <div class="circuferenciaNumerica">
+                                    @Html.DisplayFor(modelItem => item.IdJogo)
+                                </div>
+                            </span>
+                            <div class="placar-jogo">
+
+                                <div class="placar-jogo-informacoes">
+                                    @*<span>@Html.DisplayFor(modelItem => item.Competicao)</span>*@
+                                    <span>
+                                        @item.DataJogo.ToString("f")
+                                    </span>
+                                </div>
+                                <div class="placar-jogo-equipes">
+                                    <span>
+
+                                        @*@Html.DisplayFor(modelItem => item.IdCompeticao)*@
+                                    </span>
+                                    <span class="placar-jogo-equipes-item placar-jogo-equipes-mandante">
+                                        @Html.DisplayFor(modelItem => item.NomeTimeMandante)
+                                        @Html.HiddenFor(modelitem => item.IdTimeMandante)
+                                    </span>
+                                    <span class="placar-jogo-equipes-item placar-jogo-equipes-placar">
+                                        <span class="placar-jogo-equipes-placar-mandante resultadoJogo">
+                                            @Html.DisplayFor(modelItem => item.ResultadoMandante)
+                                        </span>
+                                        <span>X</span>
+                                        <span class="placar-jogo-equipes-placar-visitante resultadoJogo">
+                                            @Html.DisplayFor(modelItem => item.ResultadoVisitante)
+
+
+                                        </span>
+                                    </span>
+                                    <span class="placar-jogo-equipes-item placar-jogo-equipes-visitante">
+                                        @Html.DisplayFor(modelItem => item.NomeTimeVisitante)
+                                        @Html.HiddenFor(modelItem => item.IdTimeVisitante)
+                                    </span>
+                                </div>
+                                <div class="placar-jogo-informacoes-campeonato">
+                                    <span>@Html.DisplayFor(modelItem => item.Competicao)</span>
+                                    @*<span>
+                                            @item.DataJogo.ToString("f")
+                                        </span>*@
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+
+                }
+
+            }
+            else
+            {
+                <h1 class="text text-danger">Aviso: Este campeonato não possui jogos cadastrados!</h1>
+            }
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Home Administrativa";
+}
+
+<h2>Dashboard - Administrativo</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <h4 class="panel panel-heading">Área de Usuário</h4>
+                <div class="btn">
+                    @Html.ActionLink("Alterar cadastro", "Editar", "Usuarios", null, new {@class = "btn btn-success "})
+                </div>
+                <div class="btn">
+                    @Html.ActionLink("Cadastrar novo Apostador", "Participar", "Usuarios", null, new { @class = "btn btn-success " })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <h4 class="panel panel-heading">Área de Países</h4>
+                <div class="btn">
+                    @Html.ActionLink("Cadastrar País", "CadastrarPais", "Paises", null, new {@class = "btn btn-success"})
+                </div>
+                <div class="btn">
+                    @Html.ActionLink("Listar Países", "ListarPaisesCadastrados", "Paises", null, new {@class = "btn btn-success"})
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <h4 class="panel panel-heading">Área de Competições</h4>
+                <div class="btn">
+                    @Html.ActionLink("Cadastrar Competição", "CadastrarCompeticao", "Competicao", null, new {@class = "btn btn-success"})
+
+                </div>
+                <div class="btn">
+                    @Html.ActionLink("Listar Competicões", "ListarCompeticoes", "Competicao", null, new {@class = "btn btn-success"})
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <h4 class="panel panel-heading">Área de Times</h4>
+                <div class="btn">
+                    @Html.ActionLink("Cadastrar Times", "CadastrarTime", "Times", null, new { @class = "btn btn-success" })
+
+                </div>
+                <div class="btn">
+                    @Html.ActionLink("Listar Times", "Index", "Times", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
